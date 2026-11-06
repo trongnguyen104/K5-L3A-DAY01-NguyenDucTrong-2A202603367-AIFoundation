@@ -1,0 +1,145 @@
+{
+ "seed": 8492,
+ "predictions": {
+  "ml_f1": {
+   "text": "0.667",
+   "time": "17:15:32"
+  },
+  "ml_lr": {
+   "text": "lr=0.001 thì đường loss ngang hơi hướng xuống, lr=50 thì đường loss dao động lên xuống giống hình sin",
+   "time": "17:15:38"
+  },
+  "dl_curve": {
+   "text": "1. Không giảm mãi được. 2. MLP sẽ hơn logistic regression vì có thêm các lớp ẩn cho các lĩnh vực phức tạp.",
+   "time": "17:16:02"
+  },
+  "dl_relu": {
+   "text": "Nếu xóa bỏ nn.ReLU(), mạng 2 lớp Linear liên tiếp sẽ trở thành 1 lớp tuyến tính duy nhất tương đương mô hình Machine Learning. F1 sẽ giảm đi",
+   "time": "17:16:14"
+  },
+  "emb_search": {
+   "text": "ham",
+   "time": "17:19:03"
+  },
+  "emb_tricky": {
+   "text": "BoW sẽ đoán đúng nhiều hơn",
+   "time": "17:20:31"
+  },
+  "llm_models": {
+   "text": "gpt-6.1-terra",
+   "time": "17:23:09"
+  },
+  "llm_fewshot": {
+   "text": "F1 tăng",
+   "time": "17:23:30"
+  }
+ },
+ "checks": {
+  "1.1 vectorize": true,
+  "1.2 sigmoid / predict_proba": true,
+  "1.3 train_logreg": true,
+  "1.4 metrics": true,
+  "2.1 build_mlp": true,
+  "2.2 train_mlp": true,
+  "3.1–3.2 cosine / top_k_similar": true,
+  "3.3 knn_predict": true,
+  "4.2–4.3 prompt / parse_label": false,
+  "4.1 + 4.4 call_openai / llm_classify_batch": false
+ },
+ "experiments": [
+  {
+   "key": "ml_f1",
+   "time": "17:15:32"
+  },
+  {
+   "key": "ml_lr",
+   "time": "17:15:38"
+  },
+  {
+   "key": "dl_curve",
+   "time": "17:16:02"
+  },
+  {
+   "key": "dl_relu",
+   "time": "17:16:14"
+  },
+  {
+   "key": "emb_search",
+   "time": "17:19:03"
+  },
+  {
+   "key": "emb_tricky",
+   "time": "17:20:31"
+  },
+  {
+   "key": "llm_models",
+   "time": "17:23:09"
+  },
+  {
+   "key": "llm_fewshot",
+   "time": "17:23:30"
+  }
+ ],
+ "results": {
+  "1. BoW + LogReg (tự code)": {
+   "accuracy": 0.984516129032258,
+   "precision": 1.0,
+   "recall": 0.8636363636363636,
+   "f1": 0.9268292682926829,
+   "f1_SUB": 0.9743589743589743,
+   "train_s": 4.93914616499751,
+   "msg_per_s": 22774.357543574508,
+   "p50_ms": 0.05825550033478066,
+   "p95_ms": 0.10774265192594612,
+   "usd_per_1k": 0.0
+  },
+  "2. BoW + MLP (deep learning)": {
+   "accuracy": 0.9896774193548387,
+   "precision": 0.9651162790697675,
+   "recall": 0.9431818181818182,
+   "f1": 0.9540229885057472,
+   "f1_SUB": 0.975609756097561,
+   "train_s": 11.637001290997432,
+   "msg_per_s": 20577.862491198688,
+   "p50_ms": 0.3384494975762209,
+   "p95_ms": 0.4459453492017928,
+   "usd_per_1k": 0.0
+  },
+  "3a. Encoder (MiniLM) + kNN": {
+   "accuracy": 0.9806451612903225,
+   "precision": 0.8686868686868687,
+   "recall": 0.9772727272727273,
+   "f1": 0.9197860962566845,
+   "f1_SUB": 1.0,
+   "train_s": 92.47189765900112,
+   "msg_per_s": 26.513762953878814,
+   "p50_ms": 47.324974000730435,
+   "p95_ms": 65.27589054821868,
+   "usd_per_1k": 0.0
+  },
+  "3b. Encoder (MiniLM) + LogReg": {
+   "accuracy": 0.9935483870967742,
+   "precision": 0.9662921348314607,
+   "recall": 0.9772727272727273,
+   "f1": 0.9717514124293786,
+   "f1_SUB": 1.0,
+   "train_s": 93.00338129500233,
+   "msg_per_s": 29.814766429800006,
+   "p50_ms": 28.858949999630568,
+   "p95_ms": 38.229441301882616,
+   "usd_per_1k": 0.0
+  },
+  "3c. Encoder (MiniLM) + MLP head": {
+   "accuracy": 0.9909677419354839,
+   "precision": 0.9550561797752809,
+   "recall": 0.9659090909090909,
+   "f1": 0.96045197740113,
+   "f1_SUB": 1.0,
+   "train_s": 93.67635602099836,
+   "msg_per_s": 29.66000253814685,
+   "p50_ms": 29.704609500186052,
+   "p95_ms": 39.49008250292535,
+   "usd_per_1k": 0.0
+  }
+ }
+}
